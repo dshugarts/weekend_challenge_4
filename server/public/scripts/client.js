@@ -46,6 +46,9 @@ self.addView = function(image) {
   })
 } // end addLike
 
+self.viewComment = function(image) {
+  console.log('comment');
+} // end viewComment
 
 self.getImages();
 

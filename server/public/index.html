@@ -30,9 +30,10 @@
                     <img ng-hide="imageshow" src={{image.pic}} height="200px" width="200px"></a>
                     <a href="" ng-show="imageshow" ng-click="imageshow = false; vm.addView(image)">{{image.image_description}}</a>
                     </div>  
-                <button  ng-click="vm.addLike(image)" class="btn btn-info">Like Image!</button></td>
-                <p>Likes: {{image.likes}}</p>
-                <p>Views: {{image.views}}</p>
+                <button  ng-click="vm.addLike(image)" class="btn btn-success">Like Image!</button>
+                <button  ng-click="vm.viewComment(image)" class="btn btn-info">View Comments!</button>
+                <p><strong>Image Likes: </strong> {{image.likes}}</p>
+                <p><strong>Image Views: </strong>{{image.views}}</p>
         </figure>
     </div>
 </section>
