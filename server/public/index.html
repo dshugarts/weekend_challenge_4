@@ -14,7 +14,24 @@
 
 <body>
 <main ng-controller="ImageController as vm">
-    
+<h1>My Life in Images</h1>
+</br>
+</br>
+<section class="container">
+    <table class="table">
+        <tbody ng-repeat="image in vm.imagesArray">
+            <tr>
+                <td><a href="#"><img src={{image.pic}} height="200px" width="200px"></a></td>
+            </tr>
+            <tr>
+                <td><button  ng-click="vm.addLike(image)" class="btn btn-info">Like Image!</button></td>
+                <td>Hi</td>
+            </tr>
+
+
+        </tbody>
+    </table>
+</section>
 </main>
 </body>
 
