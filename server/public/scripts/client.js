@@ -32,6 +32,18 @@ self.addLike = function(image) {
   })
 } // end addLike
 
+self.custom = true;
+
+self.hideImage = function(image) {
+  console.log('description');
+  image.toggle = !image.toggle;
+} // end hideImage
+
+self.showImage = function(image) {
+  console.log('image');
+  image.toggle=false;
+} // end showImage
+
 self.getImages();
 
 }]);

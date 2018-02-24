@@ -21,14 +21,18 @@
     <table class="table">
         <tbody ng-repeat="image in vm.imagesArray">
             <tr>
-                <td><a href="#"><img src={{image.pic}} height="200px" width="200px"></a></td>
+                <td>
+                    <div>
+                    <a href="" ng-click="imageshow = !imageshow">
+                    <img ng-hide="imageshow" src={{image.pic}} height="200px" width="200px"></a>
+                    <a href="" ng-show="imageshow" ng-click="imageshow = false">{{image.image_description}}</a>
+                </div>  
+                </td>
             </tr>
             <tr>
                 <td><button  ng-click="vm.addLike(image)" class="btn btn-info">Like Image!</button></td>
                 <td>{{image.likes}}</td>
             </tr>
-
-
         </tbody>
     </table>
 </section>
