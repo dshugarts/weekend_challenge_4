@@ -7,35 +7,36 @@
   <title>My Life in Images</title>
   <script src="vendors/angular.min.js"></script>
   <script src="scripts/client.js"></script>
-  <link rel="stylesheet" type="text/css" href="styles/style.css">
   <link rel="stylesheet" type="text/css" href="styles/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="styles/style.css">
 
 </head>
 
 <body>
 <main ng-controller="ImageController as vm">
-<h1>My Life in Images</h1>
+<div class="pageContainer">
+<div class="heading">
+        <h1>
+            My Life in Images!
+            <small class="text-muted">or at least the images I had on my phone</small>
+            </h1></div>
 </br>
 </br>
 <section class="container">
-    <table class="table">
-        <tbody ng-repeat="image in vm.imagesArray">
-            <tr>
-                <td>
+    <div class="gallery">
+        <figure ng-repeat="image in vm.imagesArray">
                     <div>
                     <a href="" ng-click="imageshow = !imageshow">
                     <img ng-hide="imageshow" src={{image.pic}} height="200px" width="200px"></a>
-                    <a href="" ng-show="imageshow" ng-click="imageshow = false">{{image.image_description}}</a>
-                </div>  
-                </td>
-            </tr>
-            <tr>
-                <td><button  ng-click="vm.addLike(image)" class="btn btn-info">Like Image!</button></td>
-                <td>{{image.likes}}</td>
-            </tr>
-        </tbody>
-    </table>
+                    <a href="" ng-show="imageshow" ng-click="imageshow = false; vm.addView(image)">{{image.image_description}}</a>
+                    </div>  
+                <button  ng-click="vm.addLike(image)" class="btn btn-info">Like Image!</button></td>
+                <p>Likes: {{image.likes}}</p>
+                <p>Views: {{image.views}}</p>
+        </figure>
+    </div>
 </section>
+</div>
 </main>
 </body>
 

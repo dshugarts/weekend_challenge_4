@@ -22,7 +22,7 @@ self.addLike = function(image) {
   console.log(image, 'Liked!');
   $http({
     method: 'PUT',
-    url: `/images/${image.id}`,
+    url: `/images/likes/${image.id}`,
     data: { image: image }
   }).then(function(response){
     console.log('response', response);
@@ -32,17 +32,20 @@ self.addLike = function(image) {
   })
 } // end addLike
 
-self.custom = true;
+self.addView = function(image) {
+  console.log(image, 'Liked!');
+  $http({
+    method: 'PUT',
+    url: `/images/views/${image.id}`,
+    data: { image: image }
+  }).then(function(response){
+    console.log('response', response);
+    self.getImages();
+  }).catch(function(error){
+    console.log('Error updating image views', error);
+  })
+} // end addLike
 
-self.hideImage = function(image) {
-  console.log('description');
-  image.toggle = !image.toggle;
-} // end hideImage
-
-self.showImage = function(image) {
-  console.log('image');
-  image.toggle=false;
-} // end showImage
 
 self.getImages();
 

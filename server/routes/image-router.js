@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
       })
   }); // end GET
 
-  router.put('/:id', (req, res) => {
+  router.put('/likes/:id', (req, res) => {
     const id = req.params.id
     const like = req.body.image.likes;
     const newLike = (like + 1);
@@ -30,7 +30,24 @@ router.get('/', (req, res) => {
         res.sendStatus(500);
       })
 
-  }); // end PUT
+  }); // end PUT for likes
+
+  router.put('/views/:id', (req, res) => {
+    const id = req.params.id
+    const view = req.body.image.views;
+    const newView = (view + 1);
+    console.log('Update view', view);
+    console.log('newView', newView);
+    let queryText = `UPDATE images SET views=$2 WHERE id=$1`;
+    pool.query(queryText, [id, newView])
+      .then((result) => {
+        res.sendStatus(200);
+      })
+      .catch((err) => {
+        res.sendStatus(500);
+      })
+
+  }); // end PUT for views
 
 
 
