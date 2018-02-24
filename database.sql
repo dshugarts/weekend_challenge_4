@@ -1,10 +1,18 @@
 CREATE TABLE images (
-    id serial primary key,
+    image_id serial primary key,
     pic varchar(255),
     image_description varchar(255),
     likes int,
     views int
 );
+
+CREATE TABLE comments (
+    id serial primary key,
+    name varchar(20),
+    comment varchar(255),
+    image_id INT REFERENCES images ON DELETE CASCADE
+);
+
 
 INSERT INTO images (pic, image_description, likes, views)
 VALUES ('/assets/Baby.png', 'I have always loved food!', 0 ,0);
