@@ -5,6 +5,14 @@ const imageController = app.controller('ImageController', ['$http', function($ht
   console.log('AJS');
 
 self.imagesArray = [];
+self.commentsArray = [];
+self.newComment = {};
+
+self.createComment = function(){
+  console.log(self.newComment);
+  self.commentsArray.push(angular.copy(self.newComment));
+  self.addComment(self.newComment);
+};
 
 self.getImages = function() {
   $http({
@@ -22,7 +30,7 @@ self.addLike = function(image) {
   console.log(image, 'Liked!');
   $http({
     method: 'PUT',
-    url: `/images/likes/${image.id}`,
+    url: `/images/likes/${image.image_id}`,
     data: { image: image }
   }).then(function(response){
     console.log('response', response);
@@ -36,7 +44,7 @@ self.addView = function(image) {
   console.log(image, 'Liked!');
   $http({
     method: 'PUT',
-    url: `/images/views/${image.id}`,
+    url: `/images/views/${image.image_id}`,
     data: { image: image }
   }).then(function(response){
     console.log('response', response);
@@ -47,8 +55,24 @@ self.addView = function(image) {
 } // end addLike
 
 self.viewComment = function(image) {
-  console.log('comment');
+  console.log('comment', image);
+  self.commentForm = true;
+  
+  $http({
+    method: 'GET',
+    url: `/images/comments/${image.image_id}`
+  }).then(function(response){
+    console.log('response', response.data);
+    self.commentsArray = response.data;
+  }).catch(function(error){
+    console.log('Error getting comments', error);
+  })
 } // end viewComment
+
+
+self.addComment = function(comment) {
+  console.log(comment);
+} // end addComment
 
 self.getImages();
 
