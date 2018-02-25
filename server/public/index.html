@@ -27,13 +27,15 @@
         <figure ng-repeat="image in vm.imagesArray">
                     <div>
                     <a href="" ng-click="imageshow = !imageshow">
-                    <img ng-hide="imageshow" src={{image.pic}} height="200px" width="200px"></a>
-                    <a href="" ng-show="imageshow" ng-click="imageshow = false; vm.addView(image)">{{image.image_description}}</a>
+                    <img ng-hide="imageshow" src={{image.pic}} class="imagebox" height="200px" width="200px"></a>
+                    <a href="" ng-show="imageshow" class="imagebox" ng-click="imageshow = false; vm.addView(image)">{{image.image_description}}</a>
                     </div>  
+            <div class="buttons">      
                 <button  ng-click="vm.addLike(image)" class="btn btn-success">Like Image!</button>
-                <button  ng-click="vm.viewComment(image)" class="btn btn-info"  ng-model="vm.commentForm" ng-init="vm.commentForm = false">View Comments!</button>
+                <button  ng-click="vm.viewComment(image)" class="btn btn-primary"  ng-model="vm.commentForm" ng-init="vm.commentForm = false">View Comments!</button>
                 <p><strong>Image Likes: </strong> {{image.likes}}</p>
                 <p><strong>Image Views: </strong>{{image.views}}</p>
+            </div> 
         </figure>
     </div>
     <section class="container" ng-if="vm.commentForm">
@@ -45,6 +47,7 @@
               </li>
             </ul>
             <form class="col-md-12">
+                <h3>Add a Comment</h3>
                     <div class="form-group col-md-8">
                     <label for="commentName">Name:</label>
                     <input type="text" name="commentName" class="form-control" ng-model="vm.newComment.name" placeholder="User Name"/>
@@ -52,10 +55,9 @@
                     <div class="form-group col-md-8">
                     <label for="commentComment">Comment:</label>
                     <input type="text" name="commentComment" class="form-control" ng-model="vm.newComment.comment" placeholder="Enter a Comment"/>
-                    <input>{{image.image_id}}</input>
                     </div>
                     <button  ng-click="vm.createComment(newComment)" class="btn btn-success">Add Comment!</button>
-                    <button  ng-click="vm.cancelComment(newComment)" class="btn btn-danger">Cancel Comment!</button>
+                    <button  ng-click="vm.cancelComment()" class="btn btn-danger">Cancel Comment!</button>
             </form>
           </section>
         </main>

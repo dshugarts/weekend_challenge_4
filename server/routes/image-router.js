@@ -53,7 +53,6 @@ router.get('/', (req, res) => {
 
   router.get('/comments/:id', (req, res) => {
     const id = req.params.id;
-    console.log(id);
     const sqlText = 'SELECT comments.image_id, comments.name, comments.comment FROM comments JOIN images ON comments.image_id=images.image_id WHERE comments.image_id=$1';
     pool.query(sqlText, [id])
       .then(function(result) {
@@ -67,7 +66,22 @@ router.get('/', (req, res) => {
   });
 
 
-
+  router.post('/comments/:id', (req, res) => {
+    const id = req.params.id;
+    const comment = req.body.comment;
+    console.log(id, comment);
+    const sqlText = `INSERT INTO comments (name, comment, image_id)
+        VALUES($1, $2, $3);`
+    pool.query(sqlText,[comment.name, comment.comment, comment.image_id])
+        .then(function(result){
+            console.log('Check-In added', result);
+            res.sendStatus(200);
+        })
+        .catch(function(error){
+            console.log('Could not Check-In', error);
+            res.sendStatus(500);
+        }) 
+})
 
 
 module.exports = router;

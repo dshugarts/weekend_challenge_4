@@ -7,12 +7,14 @@ const imageController = app.controller('ImageController', ['$http', function($ht
 self.imagesArray = [];
 self.commentsArray = [];
 self.newComment = {};
+self.addCommentArray = [];
 
 self.createComment = function(){
   console.log(self.newComment);
   self.commentsArray.push(angular.copy(self.newComment));
   self.addComment(self.newComment);
 };
+
 
 self.getImages = function() {
   $http({
@@ -57,13 +59,13 @@ self.addView = function(image) {
 self.viewComment = function(image) {
   console.log('comment', image);
   self.commentForm = true;
-  
   $http({
     method: 'GET',
     url: `/images/comments/${image.image_id}`
   }).then(function(response){
     console.log('response', response.data);
     self.commentsArray = response.data;
+    console.log(self.addCommentArray);
   }).catch(function(error){
     console.log('Error getting comments', error);
   })
@@ -72,7 +74,21 @@ self.viewComment = function(image) {
 
 self.addComment = function(comment) {
   console.log(comment);
+  $http({
+    method: 'POST',
+    url: `/images/comments/${comment.image_id}`,
+    data: { comment: comment } 
+  }).then(function(response){
+    console.log('response', response.data);
+    self.viewComment();
+  }).catch(function(error){
+    console.log('Error getting comments', error);
+  })
 } // end addComment
+
+self.cancelComment = function() {
+  self.commentForm = false;
+} // end cancelComment
 
 self.getImages();
 

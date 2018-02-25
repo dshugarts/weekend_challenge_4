@@ -41,3 +41,20 @@
   h1 {
       color: blue;
   }
+
+  .imagebox {
+      padding: 4px;
+  }
+
+  .buttons {
+      position: relative;
+      left: 30px;
+  }
+
+  .col-md-12 {
+      padding: 20px;
+  }
+
+.list-group {
+    padding: 10px;
+}
