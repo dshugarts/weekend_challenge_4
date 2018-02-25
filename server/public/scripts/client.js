@@ -3,6 +3,7 @@ const app = angular.module('imageApp', []);
 const imageController = app.controller('ImageController', ['$http', function($http){
   let self = this;
   console.log('AJS');
+  self.myGallery = true;
 
 self.imagesArray = [];
 self.commentsArray = [];
@@ -19,7 +20,7 @@ self.createComment = function(thing){
     console.log(self.newComment);
   self.myArray.push(angular.copy(self.newComment));
   console.log(self.myArray);
-  }
+  } // end else if
   self.createFinalComment(self.myArray);
 };
 
@@ -31,7 +32,7 @@ self.createFinalComment= function(array) {
     "comment": array[1].comment,
   }
   console.log(self.finalComment);
-  self.addComment (self.finalComment);
+  self.addComment(self.finalComment);
 }
 
 
@@ -78,6 +79,8 @@ self.addView = function(image) {
 self.viewComment = function(image) {
   console.log('comment', image);
   self.commentForm = true;
+  self.myGallery = false;
+  self.comment = true;
   $http({
     method: 'GET',
     url: `/images/comments/${image.image_id}`
@@ -106,13 +109,27 @@ self.addComment = function(finalComment) {
 } // end addComment
 
 self.cancelComment = function() {
-  self.commentForm = false;
+  self.addCommentForm = false;
 } // end cancelComment
 
 self.clearComment = function() {
   self.newComment.name = null
   self.newComment.comment = null
+  self.addCommentForm = false
+  self.comment = false
+  self.newComment = {}
+  self.addComment = {}
+  self.finalComment = {}
+  self.myArray = []
 } // end clearComment
+
+self.showForm = function() {
+  self.addCommentForm = true;
+} // end show form
+
+self.backToPhotos = function() {
+  location.reload(true);
+} //end back to photos
 
 self.getImages();
 

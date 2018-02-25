@@ -22,7 +22,7 @@
             </h1></div>
 </br>
 </br>
-<section class="container">
+<section class="container" ng-if="vm.myGallery">
     <div class="gallery">
         <figure ng-repeat="image in vm.imagesArray">
                     <div>
@@ -38,6 +38,7 @@
             </div> 
         </figure>
     </div>
+    </section>
     <section class="container" ng-if="vm.commentForm">
             <h3>Image Comments</h3>
             <ul class="list-group">
@@ -45,7 +46,13 @@
                   <strong>{{comment.name}}:</strong>
                   {{comment.comment}}
               </li>
-            </ul>
+              <div class="commentBtns">
+              <button ng-model="successBtn" ng-click="vm.showForm()" ng-if="vm.comment" class="btn btn-success">Click to Comment!</button>
+              <button ng-model="backBtn" ng-click="vm.backToPhotos()" class="btn btn-danger">Back to the Photos!</button>
+            </div>
+             </ul>
+    </section>
+    <section class="container" ng-if="vm.addCommentForm"        
             <form class="col-md-12">
                 <h3>Add a Comment</h3>
                     <div class="form-group col-md-8">

@@ -48,7 +48,7 @@
 
   .buttons {
       position: relative;
-      left: 30px;
+      text-align: center;
   }
 
   .col-md-12 {
@@ -57,4 +57,13 @@
 
 .list-group {
     padding: 10px;
+}
+
+#successBtn {
+    padding: 10px;
+}
+
+.commentBtns {
+    padding: 20px;
+    text-align: center;
 }
