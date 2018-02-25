@@ -67,9 +67,8 @@ router.get('/', (req, res) => {
 
 
   router.post('/comments/:id', (req, res) => {
-    const id = req.params.id;
-    const comment = req.body.comment;
-    console.log(id, comment);
+    const comment = req.body.finalComment;
+    console.log(comment);
     const sqlText = `INSERT INTO comments (name, comment, image_id)
         VALUES($1, $2, $3);`
     pool.query(sqlText,[comment.name, comment.comment, comment.image_id])

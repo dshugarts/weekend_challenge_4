@@ -7,13 +7,32 @@ const imageController = app.controller('ImageController', ['$http', function($ht
 self.imagesArray = [];
 self.commentsArray = [];
 self.newComment = {};
-self.addCommentArray = [];
+self.addComment = {};
+self.myArray = [];
 
-self.createComment = function(){
-  console.log(self.newComment);
-  self.commentsArray.push(angular.copy(self.newComment));
-  self.addComment(self.newComment);
+
+self.createComment = function(thing){
+  if (thing) {
+    console.log('image', thing);
+    self.myArray.push(angular.copy(thing));
+  } else if (self.newComment) {
+    console.log(self.newComment);
+  self.myArray.push(angular.copy(self.newComment));
+  console.log(self.myArray);
+  }
+  self.createFinalComment(self.myArray);
 };
+
+self.createFinalComment= function(array) {
+ console.log(array);
+  self.finalComment = {
+    "image_id": array[0].image_id,
+    "name": array[1].name,
+    "comment": array[1].comment,
+  }
+  console.log(self.finalComment);
+  self.addComment (self.finalComment);
+}
 
 
 self.getImages = function() {
@@ -65,22 +84,22 @@ self.viewComment = function(image) {
   }).then(function(response){
     console.log('response', response.data);
     self.commentsArray = response.data;
-    console.log(self.addCommentArray);
   }).catch(function(error){
     console.log('Error getting comments', error);
   })
 } // end viewComment
 
 
-self.addComment = function(comment) {
-  console.log(comment);
+self.addComment = function(finalComment) {
+  console.log('in POST comment', finalComment);
   $http({
     method: 'POST',
-    url: `/images/comments/${comment.image_id}`,
-    data: { comment: comment } 
+    url: `/images/comments/${finalComment.image_id}`,
+    data: { finalComment: finalComment } 
   }).then(function(response){
     console.log('response', response.data);
-    self.viewComment();
+    self.viewComment(finalComment);
+    self.clearComment();
   }).catch(function(error){
     console.log('Error getting comments', error);
   })
@@ -89,6 +108,11 @@ self.addComment = function(comment) {
 self.cancelComment = function() {
   self.commentForm = false;
 } // end cancelComment
+
+self.clearComment = function() {
+  self.newComment.name = null
+  self.newComment.comment = null
+} // end clearComment
 
 self.getImages();
 

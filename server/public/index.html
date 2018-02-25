@@ -32,7 +32,7 @@
                     </div>  
             <div class="buttons">      
                 <button  ng-click="vm.addLike(image)" class="btn btn-success">Like Image!</button>
-                <button  ng-click="vm.viewComment(image)" class="btn btn-primary"  ng-model="vm.commentForm" ng-init="vm.commentForm = false">View Comments!</button>
+                <button  ng-click="vm.viewComment(image); vm.createComment(image)" class="btn btn-primary"  ng-model="vm.commentForm" ng-init="vm.commentForm = false">View Comments!</button>
                 <p><strong>Image Likes: </strong> {{image.likes}}</p>
                 <p><strong>Image Views: </strong>{{image.views}}</p>
             </div> 
