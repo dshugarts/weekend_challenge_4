@@ -6,10 +6,14 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>My Life in Images</title>
   <script src="vendors/angular.min.js"></script>
+  <script src="vendors/angular-route.min.js" charset="utf-8"></script>
   <script src="scripts/client.js"></script>
-  <link rel="stylesheet" type="text/css" href="styles/bootstrap.min.css">
+  <link href="vendors/angular-material.css" rel="stylesheet" type="text/css">
+  <script src="vendors/angular-animate.min.js" charset="utf-8"></script>
+  <script src="vendors/angular-aria.min.js" charset="utf-8"></script>
+  <script src="vendors/angular-messages.min.js" charset="utf-8"></script>
+  <script src="vendors/angular-material.min.js" charset="utf-8"></script>
   <link rel="stylesheet" type="text/css" href="styles/style.css">
-
 </head>
 
 <body>
@@ -36,6 +40,14 @@
                 <p><strong>Image Likes: </strong> {{image.likes}}</p>
                 <p><strong>Image Views: </strong>{{image.views}}</p>
             </div> 
+            <div text-align="center" id="popupContainer">
+                <md-button class="md-primary md-raised" ng-click="vm.showAdvanced($event)">Prompt Dialog</md-button>
+            </div>
+            <div ng-if="status" id="status">
+                <b layout="row" layout-align="center center" class="md-padding">
+                  {{status}}
+                </b>
+              </div>
         </figure>
     </div>
     </section>
@@ -52,21 +64,15 @@
             </div>
              </ul>
     </section>
-    <section class="container" ng-if="vm.addCommentForm"        
-            <form class="col-md-12">
-                <h3>Add a Comment</h3>
-                    <div class="form-group col-md-8">
-                    <label for="commentName">Name:</label>
-                    <input type="text" name="commentName" class="form-control" ng-model="vm.newComment.name" placeholder="User Name"/>
-                    </div>
-                    <div class="form-group col-md-8">
-                    <label for="commentComment">Comment:</label>
-                    <input type="text" name="commentComment" class="form-control" ng-model="vm.newComment.comment" placeholder="Enter a Comment"/>
-                    </div>
-                    <button  ng-click="vm.createComment(newComment)" class="btn btn-success">Add Comment!</button>
-                    <button  ng-click="vm.cancelComment()" class="btn btn-danger">Cancel Comment!</button>
-            </form>
+    <section class="container" ng-if="vm.addCommentForm">
+
           </section>
+          <div ng-if="vm.status" id="status">
+            <b layout="row" layout-align="center center" class="md-padding">
+              {{status}}
+            </b>
+            </div>
+            
         </main>
 </section>
 </div>

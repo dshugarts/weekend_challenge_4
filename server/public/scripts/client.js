@@ -1,6 +1,6 @@
-const app = angular.module('imageApp', []);
+const app = angular.module('imageApp', ['ngMaterial']);
 
-const imageController = app.controller('ImageController', ['$http', function($http){
+const imageController = app.controller('ImageController', ['$http', '$mdDialog', function($http, $mdDialog){
   let self = this;
   console.log('AJS');
   self.myGallery = true;
@@ -10,6 +10,7 @@ self.commentsArray = [];
 self.newComment = {};
 self.addComment = {};
 self.myArray = [];
+self.status = ' ';
 
 
 self.createComment = function(thing){
@@ -132,5 +133,36 @@ self.backToPhotos = function() {
 } //end back to photos
 
 self.getImages();
+
+self.showAdvanced = function(ev) {
+  $mdDialog.show({
+    controller: DialogController,
+    templateUrl: 'dialog1.tmpl.html',
+    parent: angular.element(document.body),
+    targetEvent: ev,
+    clickOutsideToClose:true,
+    fullscreen: self.customFullscreen // Only for -xs, -sm breakpoints.
+  })
+  .then(function(answer) {
+    self.status = 'You said the information was "' + answer + '".';
+  }, function() {
+    self.status = 'You cancelled the dialog.';
+  });
+};
+
+function DialogController($scope, $mdDialog) {
+  $scope.hide = function() {
+    $mdDialog.hide();
+  };
+
+  $scope.cancel = function() {
+    $mdDialog.cancel();
+  };
+
+  $scope.answer = function(answer) {
+    $mdDialog.hide(answer);
+  };
+}
+
 
 }]);
